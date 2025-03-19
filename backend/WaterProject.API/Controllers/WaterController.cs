@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WaterProject.API.Data;
 
@@ -13,9 +12,22 @@ namespace WaterProject.API.Controllers
         public WaterController(WaterDbContext temp) => _waterDbContext = temp;
 
         [HttpGet("AllProjects")]
-        public IEnumerable<Project> GetProjects()
+        public IActionResult GetProjects(int pageSize = 10, int pageNum = 1)
         {
-            return _waterDbContext.Projects.ToList();
+            var something = _waterDbContext.Projects
+                .Skip((pageNum-1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var totalNumProjects = _waterDbContext.Projects.Count();
+
+            var someObject = new
+            {
+                Projects = something,
+                TotalNumProjects = totalNumProjects
+            };
+
+            return Ok(someObject);
         }
 
         [HttpGet("FunctionalProjects")]
