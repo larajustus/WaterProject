@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/af91bec8-9d95-4240-84e6-4a5fd94710dc/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/WaterProject-Justus-Backend",
+  "appService.deploySubpath": "backend/WaterProject.API/publish"
+}
